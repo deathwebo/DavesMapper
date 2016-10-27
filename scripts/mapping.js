@@ -663,6 +663,24 @@ var createCookie = function (name, value, days) {
     }
   },
 
+  showKeyboardShortcuts: function(e) {
+    if(event.which === 63) {
+      e.preventDefault();
+      showOverlay([
+        '<h3>Keyboard Shortcuts</h3>',
+        '<section id="shortcuts" class="columns">',
+        '<span class="keyboard"><span class="key">n</span> New Map</span>',
+        '<span class="keyboard"><span class="key">shift</span>+<span class="key">n</span> Normal Mode</span>',
+        '<span class="keyboard"><span class="key">s</span> Staggered Mode</span>',
+        '<span class="keyboard"><span class="key">shift</span>+<span class="key">s</span> Staggered and Capped Mode</span>',
+        '<span class="keyboard"><span class="key">c</span> Capped Ends Mode</span>',
+        '<span class="keyboard"><span class="key">g</span> Toggle Grid Mode</span>',
+        '<span class="keyboard"><span class="key">shift</span>+<span class="key">c</span> Toggle Tile Count Display</span>',
+        '</section>
+      ].join(''));
+    }
+  },
+
   /**
    * Setup for the app that is performed when the document is ready.
    */
@@ -671,6 +689,9 @@ var createCookie = function (name, value, days) {
     $("#popup").click(function () {
       $(this).fadeOut("fast");
     });
+
+    // Keyboard shortcuts event listener
+    $(document).on('keypress', showKeyboardShortcuts);
 
     // Add listeners to the artist seletion list.
     $("#artistsblock")
